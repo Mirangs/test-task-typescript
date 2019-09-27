@@ -1,24 +1,22 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
+import ImagesList from './containers/ImagesList/ImagesList';
+
 import './App.css';
 
-const App: React.FC = () => {
+const App = () => {
+  const [columnsCount, setColumnsCount] = useState(5);
+
+  const onColumnsCountChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
+    setColumnsCount(Number(evt.target.value));
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <label className="Label">
+        Grid Columns
+        <input className="Input" type="number" value={columnsCount} onChange={onColumnsCountChange} min="1"/>
+      </label>
+      <ImagesList columns={columnsCount}/>
     </div>
   );
 }
